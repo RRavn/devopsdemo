@@ -49,3 +49,5 @@ stages:
         azureSubscription: 'Free Trial (5678f06d-0313-4e3f-a700-ba0b0d6f1a22)'
         appType: 'Web App on Windows'
         WebAppName: 'DevOpsReraDemo'
+        packageForLinux: '$(System.DefaultWorkingDirectory)/_RRavn.devopsdemo/drop/WebApp.zip'
+
