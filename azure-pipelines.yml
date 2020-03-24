@@ -57,11 +57,13 @@ stages:
   jobs:
   - job: Deploy
     steps:
-    - task: AzureRmWebAppDeployment@4
+    - task: AzureWebApp@1
       inputs:
-        azureSubscription: $(prodConnection)
+        azureSubscription: 'Free Trial(5678f06d-0313-4e3f-a700-ba0b0d6f1a22)'
         appType: 'webApp'
-        WebAppName: $(prodApp)
+        appName: 'devopsrerademo'
         deployToSlotOrASE: true
-        ResourceGroupName: 'test_resource_group'
-        package: '$(Agent.WorkFolder)/1/drop/WebApp.zip'
+        resourceGroupName: 'test_resource_group'
+        slotName: 'production'
+        package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+        deploymentMethod: 'auto'
