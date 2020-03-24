@@ -67,5 +67,5 @@ stages:
         deployToSlotOrASE: true
         resourceGroupName: 'test_resource_group'
         slotName: 'production'
-        package: '$(System.DefaultWorkingDirectory)/1/drop/WebApp.zip'
+        package: '$(Agent.WorkFolder)/1/drop/WebApp.zip'
         deploymentMethod: 'auto'
