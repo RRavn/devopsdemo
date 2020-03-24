@@ -46,6 +46,12 @@ stages:
         configuration: '$(buildConfiguration)'
 
     - task: PublishBuildArtifacts@1
+    
+    - task: PublishPipelineArtifact@0
+      displayName: 'Publish Artifact: DevOpsReraDemo'
+      inputs:
+        artifactName: 'DevOpsReraDemo'
+        targetPath: '$(Build.ArtifactStagingDirectory)'
 
 - stage: Deploy
   dependsOn: Build
@@ -63,7 +69,3 @@ stages:
               appType: 'webApp'
               appName: $(prodApp)
               DeploymentType: 'zipDeploy'
-              source: 'current'  
-              path: '$(Agent.WorkFolder)/current-artifacts'  
-              project: '$(System.TeamProjectId)'  
-              pipeline: '$(System.DefinitionId)'  
