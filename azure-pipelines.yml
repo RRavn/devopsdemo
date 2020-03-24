@@ -67,7 +67,7 @@ stages:
             inputs:
               azureSubscription: $(prodConnection)
               appType: 'webApp'
-              appName: $(prodApp)
+              WebAppName: $(prodApp)
               deployToSlotOrASE: true
               ResourceGroupName: 'test_resource_group'
               package: '$(Agent.WorkFolder)/1/drop/WebApp.zip'
