@@ -54,9 +54,12 @@ stages:
     - task: AzureRmWebAppDeployment@4
       displayName: 'Deploy Azure App to development'
       inputs:
+        ConnectionType: 'AzureRM'
         azureSubscription: 'Free Trial (5678f06d-0313-4e3f-a700-ba0b0d6f1a22)'
-        appType: 'Web App on Windows'
+        appType: 'webApp'
         WebAppName: 'DevOpsReraDemo'
+        packageForLinux: '$(Agent.WorkFolder)/current-artifacts'
+        enableCustomDeployment: true
+        DeploymentType: 'webDeploy'
         deployToSlotOrASE: true
         ResourceGroupName: 'test_resource_group'
-        package: '$(Agent.WorkFolder)/current-artifacts'
