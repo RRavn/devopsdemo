@@ -43,8 +43,6 @@ stages:
 - stage: Deploy
   jobs:
   - job: Deploy
-    dependsOn: 
-    - Build
     pool:
       vmImage: 'windows-latest'
     steps:
