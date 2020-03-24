@@ -58,6 +58,13 @@ stages:
     pool:
       vmImage: 'windows-latest'
     steps:
+
+    - task: DownloadBuildArtifacts@0
+      inputs:
+        buildType: 'current'
+        downloadType: 'single'
+        artifactName: 'drop'
+        downloadPath: '$(System.ArtifactsDirectory)'
     - task: AzureWebApp@1
       inputs:
         azureSubscription: 'Free Trial(5678f06d-0313-4e3f-a700-ba0b0d6f1a22)'
@@ -66,5 +73,5 @@ stages:
         deployToSlotOrASE: true
         resourceGroupName: 'test_resource_group'
         slotName: 'production'
-        package: '$(Build.ArtifactStagingDirectory)/*.zip'
+        package: '$(System.ArtifactsDirectory)/**/*.zip'
         deploymentMethod: 'auto'
