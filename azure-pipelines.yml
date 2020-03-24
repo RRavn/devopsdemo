@@ -52,7 +52,6 @@ stages:
       inputs:
         artifactName: 'DevOpsReraDemo'
         targetPath: '$(Build.ArtifactStagingDirectory)'
-        
 - stage: Deploy
   dependsOn: Build
   jobs:
