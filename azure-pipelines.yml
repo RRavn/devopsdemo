@@ -56,7 +56,7 @@ stages:
 - stage: Deploy
   dependsOn: Build
   jobs:
-  - job: deployDevelop
+  - job: Deploy
     steps:
     - task: AzureRmWebAppDeployment@4
       inputs:
