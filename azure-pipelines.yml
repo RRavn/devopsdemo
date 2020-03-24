@@ -57,12 +57,6 @@ stages:
       runOnce:
         deploy:
           steps:
-          - task: DownloadPipelineArtifact@2 
-            inputs: 
-              source: 'current' 
-              path: '$(Agent.WorkFolder)/current-artifacts' 
-              project: '$(System.TeamProjectId)' 
-              pipeline: '$(System.DefinitionId)' 
           - task: AzureWebApp@1
             inputs:
               azureSubscription: $(prodConnection)
