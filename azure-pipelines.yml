@@ -68,5 +68,5 @@ stages:
               azureSubscription: $(prodConnection)
               appType: 'webApp'
               appName: $(prodApp)
-              package: '$(Agent.WorkFolder)/current-artifacts'
+              package: '$(Agent.WorkFolder)/1/drop/WebApp.zip'
               
