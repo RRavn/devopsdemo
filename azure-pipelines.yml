@@ -57,7 +57,7 @@ stages:
   dependsOn: Build
   jobs:
   - deployment: deployDevelop
-    displayName: 'Deploy Azure App to development'
+    displayName: 'Deploy Azure App to  development'
     environment: reraDevelopEnv
     strategy:
       runOnce:
