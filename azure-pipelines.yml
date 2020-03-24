@@ -47,11 +47,6 @@ stages:
 
     - task: PublishBuildArtifacts@1
     
-    - task: PublishPipelineArtifact@0
-      displayName: 'Publish Artifact: DevOpsReraDemo'
-      inputs:
-        artifactName: 'DevOpsReraDemo'
-        targetPath: '$(Build.ArtifactStagingDirectory)'
 - stage: Deploy
   dependsOn: Build
   jobs:
@@ -67,5 +62,5 @@ stages:
         deployToSlotOrASE: true
         resourceGroupName: 'test_resource_group'
         slotName: 'production'
-        package: '$(Agent.WorkFolder)/1/drop/WebApp.zip'
+        package: '$(System.DefaultWorkingDirectory)/1/drop/WebApp.zip'
         deploymentMethod: 'auto'
