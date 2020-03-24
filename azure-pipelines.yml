@@ -56,18 +56,13 @@ stages:
 - stage: Deploy
   dependsOn: Build
   jobs:
-  - deployment: deployDevelop
-    displayName: 'Deploy Azure App to development'
-    environment: reraDevelopEnv
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: AzureRmWebAppDeployment@4
-            inputs:
-              azureSubscription: $(prodConnection)
-              appType: 'webApp'
-              WebAppName: $(prodApp)
-              deployToSlotOrASE: true
-              ResourceGroupName: 'test_resource_group'
-              package: '$(Agent.WorkFolder)/1/drop/WebApp.zip'
+  - job: deployDevelop
+    steps:
+    - task: AzureRmWebAppDeployment@4
+      inputs:
+        azureSubscription: $(prodConnection)
+        appType: 'webApp'
+        WebAppName: $(prodApp)
+        deployToSlotOrASE: true
+        ResourceGroupName: 'test_resource_group'
+        package: '$(Agent.WorkFolder)/1/drop/WebApp.zip'
