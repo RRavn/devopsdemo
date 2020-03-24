@@ -56,6 +56,8 @@ stages:
   dependsOn: Build
   jobs:
   - job: Deploy
+    pool:
+      vmImage: 'windows-latest'
     steps:
     - task: AzureWebApp@1
       inputs:
