@@ -7,6 +7,13 @@ trigger:
 - develop
 - master
 
+variables: 
+  # Service connection as configured in project settings
+  prodConnection: 'Free Trial (5678f06d-0313-4e3f-a700-ba0b0d6f1a22)'
+
+  # App name
+  prodApp: 'DevOpsReraDemo'
+
 stages:
 - stage: Build
   jobs:
@@ -41,27 +48,22 @@ stages:
     - task: PublishBuildArtifacts@1
 
 - stage: Deploy
+  dependsOn: Build
   jobs:
   - job: Deploy
-    pool:
-      vmImage: 'windows-latest'
-    steps:
-    - task: DownloadPipelineArtifact@2
-      inputs:
-        source: 'current'
-        path: '$(Agent.WorkFolder)/current-artifacts'
-        project: '$(System.TeamProjectId)'
-        pipeline: '$(System.DefinitionId)'
-
-    - task: AzureRmWebAppDeployment@4
-      displayName: 'Deploy Azure App to development'
-      inputs:
-        ConnectionType: 'AzureRM'
-        azureSubscription: 'Free Trial (5678f06d-0313-4e3f-a700-ba0b0d6f1a22)'
-        appType: 'webApp'
-        WebAppName: 'DevOpsReraDemo'
-        packageForLinux: '$(Agent.WorkFolder)/current-artifacts'
-        enableCustomDeployment: true
-        DeploymentType: 'webDeploy'
-        deployToSlotOrASE: true
-        ResourceGroupName: 'test_resource_group'
+  - deployment: deployDevelop
+    displayName: 'Deploy Azure App to development'
+    environment: reraDevelopEnv
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: DownloadPipelineArtifact@1
+            inputs:
+              downloadPath: '$(System.DefaultWorkingDirectory)'
+          - task: AzureWebApp@1
+            inputs:
+              azureSubscription: $(prodConnection)
+              appType: 'webApp'
+              appName: $(prodApp)
+              DeploymentType: 'zipDeploy'
