@@ -50,7 +50,6 @@ stages:
 - stage: Deploy
   dependsOn: Build
   jobs:
-  - job: Deploy
   - deployment: deployDevelop
     displayName: 'Deploy Azure App to development'
     environment: reraDevelopEnv
@@ -60,7 +59,7 @@ stages:
           steps:
           - task: DownloadPipelineArtifact@1
             inputs:
-              downloadPath: '$(System.DefaultWorkingDirectory)'
+              downloadPath: '$(Agent.WorkFolder)/current-artifacts'
           - task: AzureWebApp@1
             inputs:
               azureSubscription: $(prodConnection)
