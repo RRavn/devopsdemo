@@ -46,7 +46,11 @@ stages:
         configuration: '$(buildConfiguration)'
 
     - task: PublishBuildArtifacts@1
-    
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
+        
 - stage: Deploy
   dependsOn: Build
   jobs:
@@ -62,5 +66,5 @@ stages:
         deployToSlotOrASE: true
         resourceGroupName: 'test_resource_group'
         slotName: 'production'
-        package: '$(System.DefaultWorkingDirectory)/1/drop/WebApp.zip'
+        package: '$(Build.ArtifactStagingDirectory)/*.zip'
         deploymentMethod: 'auto'
