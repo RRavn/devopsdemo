@@ -75,4 +75,4 @@ stages:
         deployToSlotOrASE: true
         ResourceGroupName: 'test_resource_group'
         SlotName: 'production'
-        packageForLinux: '$(System.DefaultWorkingDirectory)/1/drop/WebApp.zip'
+        packageForLinux: '$(System.DefaultWorkingDirectory)/../a/drop/WebApp.zip'
